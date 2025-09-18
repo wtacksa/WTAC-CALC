@@ -1,5 +1,6 @@
-export const dynamic = 'force-dynamic';
 'use client';
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
 import { useState } from 'react';
@@ -12,9 +13,8 @@ export default function RegisterPage(){
 
   const register = async () => {
     setErr(null);
-    const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: fullName } } });
-    if(error) setErr(error.message);
-    else window.location.href = '/projects';
+    const { error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: fullName } } });
+    if(error) setErr(error.message); else window.location.href = '/projects';
   };
 
   return (
